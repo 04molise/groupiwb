@@ -33,18 +33,29 @@ app.use('/api/income', incomeRoutes);
 // MongoDB connection
 const connectDB = async () => {
   try {
-    // ✅ Changed from DB_URI to MONGODB_URI
-    await mongoose.connect(process.env.MONGODB_URI); 
+    const uri = process.env.MONGODB_URI;
+    if (!uri) {
+      throw new Error('MONGODB_URI is not defined in environment variables');
+    }
+    
+    await mongoose.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      sslValidate: process.env.MONGODB_SSL_VALIDATE === 'true' // Optional override
+    });
+    
     console.log('MongoDB connected 🎉🎉');
   } catch (error) {
-    console.error('Error connecting to MongoDB:', error.message);
+    console.error('MongoDB connection failed:', error.message);
     process.exit(1);
   }
 };
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-  connectDB();
+// Start server only after successful DB connection
+connectDB().then(() => {
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
 });
