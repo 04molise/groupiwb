@@ -2,6 +2,11 @@
 backend/node_modules/
 iwb-app/node_modules/
 
+# Ignore package-lock.json
+package-lock.json
+backend/package-lock.json
+iwb-app/package-lock.json
+
 # Ignore environment files
 backend/.env
 
