@@ -1,0 +1,14 @@
+# Ignore node_modules
+backend/node_modules/
+iwb-app/node_modules/
+
+# Ignore environment files
+backend/.env
+
+# Ignore OS-specific files
+desktop.ini
+.DS_Store
+Thumbs.db
+
+# Ignore build files (for later)
+iwb-app/build/
