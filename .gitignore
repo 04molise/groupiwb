@@ -1,19 +1,41 @@
-# Ignore node_modules
+# Ignore node_modules folders
 backend/node_modules/
 iwb-app/node_modules/
+node_modules/
 
-# Ignore package-lock.json
+# Ignore package-lock.json (both root and subfolders)
 package-lock.json
 backend/package-lock.json
 iwb-app/package-lock.json
 
+# Ignore build folders
+iwb-app/build/
+backend/build/
+
 # Ignore environment files
 backend/.env
+.env
 
 # Ignore OS-specific files
 desktop.ini
 .DS_Store
 Thumbs.db
 
-# Ignore build files (for later)
-iwb-app/build/
+# Ignore duplicate/corrupted folders (like "node_modules copy")
+iwb-app/node_modules copy/
+node_modules copy/
+
+# Ignore editor/IDE files
+*.log
+*.tmp
+*.swp
+*.swo
+.vscode/
+.idea/
+*.iml
+
+# Ignore system files
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
