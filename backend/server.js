@@ -4,11 +4,14 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const morgan = require('morgan');
 
+// Force redeploy - 2025-05-05
+const forceRedeploy = "Redeploy 2025-05-05"; // ✅ Added
+
 // Import routes
 const authRoutes = require('./routes/authRoutes');
 const productRoutes = require('./routes/productRoutes');
 const salesRoutes = require('./routes/salesRoutes');
-const queryRoutes = require('./routes/queryRoutes'); // ✅ NEW
+const queryRoutes = require('./routes/queryRoutes'); 
 const incomeRoutes = require('./routes/incomeRoutes');
 
 dotenv.config();
@@ -24,16 +27,14 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/sales', salesRoutes);
-app.use('/api/queries', queryRoutes); // ✅ NEW
+app.use('/api/queries', queryRoutes); 
 app.use('/api/income', incomeRoutes);
 
 // MongoDB connection
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.DB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    // ✅ Changed from DB_URI to MONGODB_URI
+    await mongoose.connect(process.env.MONGODB_URI); 
     console.log('MongoDB connected 🎉🎉');
   } catch (error) {
     console.error('Error connecting to MongoDB:', error.message);
